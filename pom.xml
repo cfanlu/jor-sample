@@ -26,6 +26,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-velocity</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.jatools</groupId>
             <artifactId>jor</artifactId>
             <version>1.1-SNAPSHOT</version>

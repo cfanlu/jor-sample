@@ -4,7 +4,7 @@
         <Item0 Name="$id" Class="Parameter">
             <Name>$id</Name>
             <Type1>java.lang.String</Type1>
-            <DefaultValue>1</DefaultValue>
+            <DefaultValue>-1</DefaultValue>
         </Item0>
     </VariableContext>
     <Page>

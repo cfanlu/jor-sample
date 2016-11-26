@@ -50,7 +50,7 @@ public class MainController {
         } else if ("tempfile".equals(action)) {
             FileFinder.service(request, response);
         } else {
-            throw new ServletException(App.messages.getString("res.42") + action + ".");
+            throw new ServletException("res.42" + action + ".");
         }
     }
 }
