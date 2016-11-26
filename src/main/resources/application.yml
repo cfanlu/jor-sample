@@ -1,0 +1,13 @@
+# SPRING AUTOCONFIGURE
+spring:
+  velocity:
+    cache: false
+    resource-loader-path: classpath:/template/
+    properties:
+      input.encoding: utf-8
+      output.encoding: utf-8
+      userdirective: jatools.velocity.JorDirective
+
+#server settings
+server:
+  port: 8080

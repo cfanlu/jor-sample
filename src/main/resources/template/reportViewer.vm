@@ -1,0 +1,133 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>打印预览</title>
+
+    <style type="text/css">
+        <!--
+        div#header{
+            position:absolute;
+            top:0;
+            left:0;
+            padding:3px 3px 3px 3px;
+            width:100%;
+            height:30px;
+        }
+        .active-page{
+            border:solid 2 blue;
+        }
+        body {
+            overflow:hidden;
+            margin:0;
+            padding:30px 0 5px 0;
+        }
+        body>div#header{
+            position:fixed;
+        }
+        div#_container_div {
+            height:100%;
+            overflow:auto;
+            cursor:hand;
+            margin:0;
+            zoom:100%;
+            height:100%;
+            width:100%;
+            overflow:auto;
+            border:medium none thin threedhighlight inset;
+            background:#808080;
+        }
+        button {
+            padding: 0px;
+            margin:0px;
+        }
+        .toolbutton {
+            width: 25px;
+            height: 25px;
+            background-repeat: no-repeat center center;
+            margin:0px;
+            padding-left:0px;
+            padding-right:0px;
+        }
+        -->
+    </style>
+
+    <script type="application/javascript">
+        function Jatoolsbar(cfg) {
+            var me = this;
+            this.ct = document.getElementById(cfg.container);
+            this.jsettings = document.getElementById('jsettings');
+            this.asDoc = function () {
+                var d = me.jsettings;
+                return {
+                    settings: {
+                        pageWidth: parseInt(d.getAttribute('pageWidth')),
+                        pageHeight: parseInt(d.getAttribute('pageHeight')),
+                        orientation: parseInt(d.getAttribute('orientation'))
+                    },
+                    marginIgnored: true,
+                    documents : document, // 打印页面(div)们在本文档中
+                    copyrights : '杰创软件拥有版权  www.jatools.com' // 版权声明必须
+                };
+            }
+            this.print = function (prompt) {
+                if (navigator.userAgent.indexOf('MSIE') >= 0) {
+                    _jatoolsPrinter.print(me.asDoc(), prompt);
+                }
+                else {
+                    alert("仅支持在IE下打印!");
+                }
+            };
+            this.printPreview = function () {
+                if (navigator.userAgent.indexOf('MSIE') >= 0) {
+                    _jatoolsPrinter.printPreview(me.asDoc()); // 打印预览
+                }
+                else {
+                    alert("仅支持在IE下打印!");
+                }
+            };
+            this.exportAs = function (as) {
+                window.location = "/jor/export?_action_type=export&do_export=1&_job_session_id=" + me.jsettings.getAttribute('jobSessionId') + "&as=" + as;
+            };
+        }
+
+        var jatoolsbar = null;
+        window.onload = function () {
+            jatoolsbar = new Jatoolsbar({
+                container: '_container_div'
+            });
+        };
+    </script>
+</head>
+
+<body>
+
+<object id="_jatoolsPrinter" style='display:none' classid="CLSID:B43D3361-D075-4BE2-87FE-057188254255"
+        codebase="/resources/jatoolsPrinter.cab#version=8,6,1,0">
+</object>
+
+<div id='header'>
+    <button id='printbutton2' style='disabled:true' onclick='jatoolsbar.print(false)' title='打印' class="toolbutton">
+        <img src='/resources/images/print.gif'/>
+    </button>
+    <button id='previewbutton' style='disabled:true' onclick='jatoolsbar.printPreview()' title='打印预览...' class="toolbutton">
+        <img src='/resources/images/preview.gif'/>
+    </button>
+    &nbsp;&nbsp;
+    <button onclick='jatoolsbar.exportAs("xls")' title='导出成Excel' class="toolbutton">
+        <img src='/resources/images/xls.gif'/>
+    </button>
+    <button onclick='jatoolsbar.exportAs("pdf")' title='导出成PDF' class="toolbutton">
+        <img src='/resources/images/pdf.gif'/>
+    </button>
+    <button onclick='jatoolsbar.exportAs("rtf")' title='导出成Word' class="toolbutton">
+        <img src='/resources/images/word.gif'/>
+    </button>
+</div>
+
+<div id='_container_div'>
+    #jor($template $id)
+</div>
+
+</body>
+</html>
